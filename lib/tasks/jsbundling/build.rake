@@ -15,7 +15,7 @@ namespace :javascript do
     command = Jsbundling::Tasks.build_command
     p command
     p '--build-- 2'
-    stdout, stderr, status = Open3.capture3("command")
+    stdout, stderr, status = Open3.capture3(command)
     p '--build-- 3'
     p status
     p '--build-- 3a'
