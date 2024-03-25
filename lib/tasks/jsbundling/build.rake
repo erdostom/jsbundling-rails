@@ -1,3 +1,5 @@
+require 'open3'
+
 namespace :javascript do
   desc "Install JavaScript dependencies"
   task :install do
@@ -10,9 +12,11 @@ namespace :javascript do
   desc "Build your JavaScript bundle"
   build_task = task :build do
     command = Jsbundling::Tasks.build_command
-    unless system(command)
-      raise "jsbundling-rails: Command build failed, ensure `#{command}` runs without errors"
-    end
+    stdout, stderr, status = Open3.capture3("command")
+    p status
+    p stdout
+    p stderr
+    raise "jsbundling-rails: Command build failed, ensure `#{command}` runs without errors" if stderr
   end
 
   build_task.prereqs << :install unless ENV["SKIP_YARN_INSTALL"] || ENV["SKIP_BUN_INSTALL"]
