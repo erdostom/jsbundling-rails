@@ -11,11 +11,18 @@ namespace :javascript do
 
   desc "Build your JavaScript bundle"
   build_task = task :build do
+    p '--build--'
     command = Jsbundling::Tasks.build_command
+    p command
+    p '--build-- 2'
     stdout, stderr, status = Open3.capture3("command")
+    p '--build-- 3'
     p status
+    p '--build-- 3a'
     p stdout
+    p '--build-- 3b'
     p stderr
+    p '--build-- 4'
     raise "jsbundling-rails: Command build failed, ensure `#{command}` runs without errors" if stderr
   end
 
